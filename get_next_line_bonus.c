@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kakahuate <kakahuate@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 08:31:06 by kakahuate         #+#    #+#             */
-/*   Updated: 2025/06/27 11:55:48 by kakahuate        ###   ########.fr       */
+/*   Created: 2025/06/27 11:55:24 by kakahuate         #+#    #+#             */
+/*   Updated: 2025/06/30 12:20:46 by kakahuate        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_save_remaining(char *rest)
 {
@@ -82,24 +82,28 @@ char	*ft_read_until_newline(int fd, char *rest)
 	return (rest);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line_bonus(int fd)
 {
-	static char	*rest;
+	static char	*rest[FD_MAX];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	if (rest == NULL)
+	if (rest[fd] == NULL)
 	{
-		rest = malloc(1);
-		if (!rest)
+		rest[fd] = malloc(1);
+		if (!rest[fd])
 			return (NULL);
-		rest[0] = '\0';
+		rest[fd][0] = '\0';
 	}
-	rest = ft_read_until_newline(fd, rest);
-	if (!rest || rest[0] == '\0')
+	rest[fd] = ft_read_until_newline(fd, rest[fd]);
+	if (!rest[fd] || rest[fd][0] == '\0')
+	{
+		free(rest[fd]);
+		rest[fd] = NULL;
 		return (NULL);
-	line = ft_extract_newline(rest);
-	rest = ft_save_remaining(rest);
+	}
+	line = ft_extract_newline(rest[fd]);
+	rest[fd] = ft_save_remaining(rest[fd]);
 	return (line);
 }

@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kakahuate <kakahuate@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/24 16:37:12 by kakahuate         #+#    #+#             */
-/*   Updated: 2025/06/26 18:24:38 by kakahuate        ###   ########.fr       */
+/*   Created: 2025/06/30 12:20:16 by kakahuate         #+#    #+#             */
+/*   Updated: 2025/06/30 12:21:35 by kakahuate        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+
+#include "get_next_line_bonus.h"
 
 int	ft_strlen(const char *s)
 {
